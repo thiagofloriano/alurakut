@@ -4,27 +4,10 @@ import Box from "../src/components/Box";
 import { ProfileRelationsBoxWrapper } from "../src/components/ProfileRelations";
 import ProfileSidebar from "../src/components/ProfileSidebar";
 import { AlurakutMenu, OrkutNostalgicIconSet } from "../src/lib/AlurakutCommons";
+import { pessoasFavoritas, quantidades } from '../src/data'
 
 export default function Home() {
   const githubUser = 'thiagofloriano';
-  const pessoasFavoritas = [
-    'omariosouto',
-    'juunegreiros',
-    'peas',
-    'rafaballerini',
-    'designernatan'
-  ]
-
-  const quantidades = {
-    recados: Math.round(Math.random()*10),
-    fotos: Math.round(Math.random()*170),
-    videos: Math.round(Math.random()*25),
-    fas: Math.round(Math.random()*1500),
-    mensagens: Math.round(Math.random()*700),
-    confiavel: 2,
-    legal: 3,
-    sexy: 1
-  }
 
   return (
     <>
