@@ -11,10 +11,20 @@ export default function Home() {
     'omariosouto',
     'juunegreiros',
     'peas',
-    'wicz',
     'rafaballerini',
     'designernatan'
   ]
+
+  const quantidades = {
+    recados: Math.round(Math.random()*10),
+    fotos: Math.round(Math.random()*170),
+    videos: Math.round(Math.random()*25),
+    fas: Math.round(Math.random()*1500),
+    mensagens: Math.round(Math.random()*700),
+    confiavel: 2,
+    legal: 3,
+    sexy: 1
+  }
 
   return (
     <>
@@ -26,7 +36,17 @@ export default function Home() {
         <div className='welcomeArea' style={{ gridArea: 'welcomeArea' }}>
           <Box>
             <h1 className='title'>Bem-vindo(a)</h1>
-            <OrkutNostalgicIconSet></OrkutNostalgicIconSet>
+            <OrkutNostalgicIconSet
+              recados={quantidades.recados}
+              fotos={quantidades.fotos}
+              videos={quantidades.videos}
+              fas={quantidades.fas}
+              mensagens={quantidades.mensagens}
+              confiavel={quantidades.confiavel}
+              legal={quantidades.legal}
+              sexy={quantidades.sexy}
+            >
+            </OrkutNostalgicIconSet>
           </Box>
         </div>
         <div className='friendsArea' style={{ gridArea: 'friendsArea' }}>
