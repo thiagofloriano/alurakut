@@ -1,16 +1,27 @@
 import styled from 'styled-components'
 import Box from "../Box";
+import { AlurakutProfileSidebarMenuDefault } from '../../lib/AlurakutCommons.js'
 
 function ProfileSidebar(props) {
-  console.log(props);
   return (
-    <Box>
+    <Box as='aside'>
       <img
         src={`https://github.com/${props.githubUser}.png`}
         alt=''
-        style={{padding: '16px', borderRadius: '30px'}}
+        style={{borderRadius: '16px'}}
       />
-      Perfil
+      <hr/>
+
+      <p>
+        <a href={`https://github.com/${props.githubUser}`} className="boxLink">
+          @{props.githubUser}
+        </a>
+      </p>
+      <hr/>
+
+      <AlurakutProfileSidebarMenuDefault></AlurakutProfileSidebarMenuDefault>
+
+
     </Box>
   )
 }
