@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components'
 import MainGrid from "../src/components/MainGrid";
 import Box from "../src/components/Box";
+import ListBox from "../src/components/ListBox";
 import { ProfileRelationsBoxWrapper } from "../src/components/ProfileRelations";
 import ProfileSidebar from "../src/components/ProfileSidebar";
 import { AlurakutMenu, OrkutNostalgicIconSet } from "../src/lib/AlurakutCommons";
@@ -43,7 +44,7 @@ export default function Home() {
               const comunidade = {
                 id: new Date().toISOString(),
                 nome: dadosForm.get('title'),
-                capa: dadosForm.get('image')
+                image: dadosForm.get('image')
               }
               setComunities([...stateComunities, comunidade])
             }}>
@@ -71,44 +72,18 @@ export default function Home() {
         </section>
         <section className='friendsArea' style={{ gridArea: 'friendsArea' }}>
           <ProfileRelationsBoxWrapper>
-            <h2 className='smallTitle'>
-              Amigos ({pessoasFavoritas.length})
-            </h2>
-            <ul>
-              {pessoasFavoritas.map( (item, index) => {
-                return (
-                  <li key={index}>
-                    <a href={`/users/${item}`}>
-                      <img
-                        src={`https://github.com/${item}.png`}
-                        alt={item}
-                      />
-                      <span>{item}</span>
-                    </a>
-                  </li>
-                  )
-                })}
-            </ul>
+          <ListBox
+            titulo='Amigos'
+            dados={pessoasFavoritas}
+          >
+          </ListBox>
           </ProfileRelationsBoxWrapper>
           <ProfileRelationsBoxWrapper>
-            <h2 className='smallTitle'>
-              Comunidades ({stateComunities.length})
-            </h2>
-            <ul>
-              {stateComunities.map( (item) => {
-                return (
-                  <li key={item.id} id={item.id}>
-                    <a href=''>
-                      <img
-                        src={item.capa}
-                        alt={item.nome}
-                      />
-                      <span>{item.nome}</span>
-                    </a>
-                  </li>
-                  )
-                })}
-            </ul>
+            <ListBox
+              titulo='Comunidades'
+              dados={stateComunities}
+            >
+            </ListBox>
           </ProfileRelationsBoxWrapper>
         </section>
       </MainGrid>
