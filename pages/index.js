@@ -25,7 +25,7 @@ export default function Home() {
 
   return (
     <>
-      <AlurakutMenu></AlurakutMenu>
+      <AlurakutMenu githubUser={githubUser}></AlurakutMenu>
       <MainGrid>
         <section className='profileArea' style={{ gridArea: 'profileArea' }}>
           <ProfileSidebar githubUser={githubUser}></ProfileSidebar>
