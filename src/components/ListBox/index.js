@@ -8,12 +8,12 @@ function ListBox(props) {
         {props.dados.map( (item) => {
           return (
             <li key={item.id} id={item.id}>
-              <a href={item.gituser ? `https://github.com/${item.gituser}` : item.url} target='_blank'>
+              <a href={item.url} target='_blank'>
                 <img
-                  src={item.image}
-                  alt={item.nome}
+                  src={item.avatar_url ? item.avatar_url : item.image}
+                  alt={item.name}
                 />
-                <span>{item.nome}</span>
+                <span>{item.name}</span>
               </a>
             </li>
             )
