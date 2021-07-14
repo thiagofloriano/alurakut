@@ -4,6 +4,8 @@ const Box = styled.div`
   background: #FFFFFF;
   border-radius: 8px;
   padding: 16px;
+  overflow: hidden;
+  
   /* CSS Pré-Pronto */
   margin-bottom: 10px;
   .boxLink {

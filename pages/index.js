@@ -3,20 +3,37 @@ import styled from 'styled-components'
 import MainGrid from "../src/components/MainGrid";
 import Box from "../src/components/Box";
 import ListBox from "../src/components/ListBox";
+import BlogList from "../src/components/BlogList";
 import { ProfileRelationsBoxWrapper } from "../src/components/ProfileRelations";
 import ProfileSidebar from "../src/components/ProfileSidebar";
 import { AlurakutMenu, OrkutNostalgicIconSet } from "../src/lib/AlurakutCommons";
-import { comunidades, pessoasFavoritas, quantidades } from '../src/data'
-
-
+import { APIs } from '../src/data'
 
 export default function Home() {
   const [pessoas, setPessoas] = React.useState([])
+  const [comunidades, setComunidades] = React.useState([])
+  const [detalhes, setDetalhes] = React.useState({})
+  const [posts, setPosts] = React.useState([])
 
   React.useEffect( () => {
-    fetch('https://api.github.com/users/thiagofloriano/following')
+    fetch(APIs.pessoas)
     .then( (res) => res.json() )
-    .then( (data) => setPessoas(data) )
+    .then( (res) => setPessoas(res.data.friends) )
+    .catch( (error) => console.log(error) )
+
+    fetch(APIs.comunidades)
+    .then( (res) => res.json() )
+    .then( (res) => setComunidades(res.data.communities) )
+    .catch( (error) => console.log(error) )
+
+    fetch(APIs.detalhes)
+    .then( (res) => res.json() )
+    .then( (res) => setDetalhes(res.data.details[0]) )
+    .catch( (error) => console.log(error) )
+
+    fetch(APIs.posts)
+    .then( (res) => res.json() )
+    .then( (res) => setPosts(res.data) )
     .catch( (error) => console.log(error) )
   }, [] )
 
@@ -34,14 +51,14 @@ export default function Home() {
           <Box>
             <h1 className='title'>Bem-vindo(a)</h1>
             <OrkutNostalgicIconSet
-              recados={quantidades.recados}
-              fotos={quantidades.fotos}
-              videos={quantidades.videos}
-              fas={quantidades.fas}
-              mensagens={quantidades.mensagens}
-              confiavel={quantidades.confiavel}
-              legal={quantidades.legal}
-              sexy={quantidades.sexy}
+              recados={detalhes.recados}
+              fotos={detalhes.fotos}
+              videos={detalhes.videos}
+              fas={detalhes.fas}
+              mensagens={detalhes.mensagens}
+              confiavel={detalhes.confiavel}
+              legal={detalhes.legal}
+              sexy={detalhes.sexy}
             >
             </OrkutNostalgicIconSet>
           </Box>
@@ -57,7 +74,8 @@ export default function Home() {
                 name: dadosForm.get('title'),
                 image: dadosForm.get('image')
               }
-              setComunities([...stateComunities, comunidade])
+              setComunidades([...comunidades, comunidade])
+              fetch
             }}>
               <div>
                 <input
@@ -80,19 +98,22 @@ export default function Home() {
               </button>
             </form>
           </Box>
+          <Box>
+            <BlogList posts={posts}></BlogList>
+          </Box>
         </section>
         <section className='friendsArea' style={{ gridArea: 'friendsArea' }}>
           <ProfileRelationsBoxWrapper>
           <ListBox
-            titulo='Amigos'
-            dados={pessoasFavoritas}
+            titulo='Pessoas'
+            dados={pessoas}
           >
           </ListBox>
           </ProfileRelationsBoxWrapper>
           <ProfileRelationsBoxWrapper>
             <ListBox
               titulo='Comunidades'
-              dados={stateComunities}
+              dados={comunidades}
             >
             </ListBox>
           </ProfileRelationsBoxWrapper>

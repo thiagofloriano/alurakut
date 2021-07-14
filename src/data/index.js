@@ -1,52 +1,10 @@
 import React from 'react';
 
-export const pessoasFavoritas = [
-  {
-    id: 1,
-    name: 'Dev Soutinho',
-    gituser: 'omariosouto',
-    image: 'https://github.com/omariosouto.png',
-    url: ''
-  },
-  {
-    id: 2,
-    name: 'Ju Negreiros',
-    gituser: 'juunegreiros',
-    image: 'https://github.com/juunegreiros.png',
-    url: ''
-  },
-  {
-    id: 3,
-    name: 'Paulo Silveira',
-    gituser: 'peas',
-    image: 'https://github.com/peas.png',
-    url: ''
-  },
-  {
-    id: 4,
-    name: 'Rafa Ballerini',
-    gituser: 'rafaballerini',
-    image: 'https://github.com/rafaballerini.png',
-    url: ''
-  },
-  {
-    id: 5,
-    name: 'Natan Souza',
-    gituser: 'designernatan',
-    image: 'https://github.com/designernatan.png',
-    url: ''
-  }
-]
-
-export const quantidades = {
-  recados: Math.round(Math.random()*10),
-  fotos: Math.round(Math.random()*170),
-  videos: Math.round(Math.random()*25),
-  fas: Math.round(Math.random()*1500),
-  mensagens: Math.round(Math.random()*700),
-  confiavel: 2,
-  legal: 3,
-  sexy: 1
+export const APIs = {
+  pessoas: 'https://api.buttercms.com/v2/content/friends/?auth_token=f7f805bf79f567a99277d6d4845a3f7eebf33f14',
+  comunidades: 'https://api.buttercms.com/v2/content/communities/?auth_token=f7f805bf79f567a99277d6d4845a3f7eebf33f14',
+  detalhes: 'https://api.buttercms.com/v2/content/details/?auth_token=f7f805bf79f567a99277d6d4845a3f7eebf33f14',
+  posts: 'https://api.buttercms.com/v2/posts/?auth_token=f7f805bf79f567a99277d6d4845a3f7eebf33f14'
 }
 
 export const comunidades = [
