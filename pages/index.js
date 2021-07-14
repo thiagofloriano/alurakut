@@ -8,7 +8,18 @@ import ProfileSidebar from "../src/components/ProfileSidebar";
 import { AlurakutMenu, OrkutNostalgicIconSet } from "../src/lib/AlurakutCommons";
 import { comunidades, pessoasFavoritas, quantidades } from '../src/data'
 
+
+
 export default function Home() {
+  const [pessoas, setPessoas] = React.useState([])
+
+  React.useEffect( () => {
+    fetch('https://api.github.com/users/thiagofloriano/following')
+    .then( (res) => res.json() )
+    .then( (data) => setPessoas(data) )
+    .catch( (error) => console.log(error) )
+  }, [] )
+
   const [stateComunities, setComunities] = React.useState(comunidades)
   const githubUser = 'thiagofloriano';
 
@@ -43,7 +54,7 @@ export default function Home() {
               const dadosForm = new FormData(event.target)
               const comunidade = {
                 id: new Date().toISOString(),
-                nome: dadosForm.get('title'),
+                name: dadosForm.get('title'),
                 image: dadosForm.get('image')
               }
               setComunities([...stateComunities, comunidade])

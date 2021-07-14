@@ -11,9 +11,9 @@ function ListBox(props) {
               <a href={item.gituser ? `https://github.com/${item.gituser}` : item.url} target='_blank'>
                 <img
                   src={item.image}
-                  alt={item.nome}
+                  alt={item.name}
                 />
-                <span>{item.nome}</span>
+                <span>{item.name}</span>
               </a>
             </li>
             )
