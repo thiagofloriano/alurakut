@@ -7,34 +7,46 @@ import BlogList from "../src/components/BlogList";
 import { ProfileRelationsBoxWrapper } from "../src/components/ProfileRelations";
 import ProfileSidebar from "../src/components/ProfileSidebar";
 import { AlurakutMenu, OrkutNostalgicIconSet } from "../src/lib/AlurakutCommons";
-import { APIs } from '../src/data'
+import { endpoints, queries } from '../src/data'
 
 export default function Home() {
   const [pessoas, setPessoas] = React.useState([])
   const [comunidades, setComunidades] = React.useState([])
   const [detalhes, setDetalhes] = React.useState({})
   const [posts, setPosts] = React.useState([])
+  const dato_read_token = 'dd5be135b70bb32a1c92003a399204'
 
   React.useEffect( () => {
-    fetch(APIs.pessoas)
+    fetch(endpoints.pessoas)
     .then( (res) => res.json() )
     .then( (res) => setPessoas(res.data.friends) )
     .catch( (error) => console.log(error) )
 
-    fetch(APIs.comunidades)
-    .then( (res) => res.json() )
-    .then( (res) => setComunidades(res.data.communities) )
-    .catch( (error) => console.log(error) )
-
-    fetch(APIs.detalhes)
+    fetch(endpoints.detalhes)
     .then( (res) => res.json() )
     .then( (res) => setDetalhes(res.data.details[0]) )
     .catch( (error) => console.log(error) )
 
-    fetch(APIs.posts)
+    fetch(endpoints.posts)
     .then( (res) => res.json() )
     .then( (res) => setPosts(res.data) )
     .catch( (error) => console.log(error) )
+
+    fetch(endpoints.comunidades, {
+      method: 'POST',
+      headers: {
+        Authorization: dato_read_token,
+        'Content-Type': 'application/json',
+        Accept: 'application/json'
+      },
+      body: JSON.stringify({
+        query: queries.comunidades
+      })
+    })
+    .then( (res) => res.json() )
+    .then( (res) => setComunidades(res.data.allCommunities) )
+    .catch( (error) => console.log(error) )
+
   }, [] )
 
   const [stateComunities, setComunities] = React.useState(comunidades)
@@ -70,12 +82,23 @@ export default function Home() {
               event.preventDefault()
               const dadosForm = new FormData(event.target)
               const comunidade = {
-                id: new Date().toISOString(),
                 name: dadosForm.get('title'),
-                image: dadosForm.get('image')
+                image: dadosForm.get('image'),
+                url: dadosForm.get('url')
               }
+
+              fetch('./api/comunidades', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(comunidade)
+              })
+              .then( async (res) => {
+                const dadosEnviados = await res.json()
+              })
+
               setComunidades([...comunidades, comunidade])
-              fetch
             }}>
               <div>
                 <input
@@ -91,6 +114,14 @@ export default function Home() {
                   placeholder="URL da capa"
                   name="image"
                   aria-label="Imagem da capa"
+                />
+              </div>
+              <div>
+                <input
+                  type="text"
+                  placeholder="URL de destino"
+                  name="url"
+                  aria-label="URL de destino"
                 />
               </div>
               <button type='submit'>
