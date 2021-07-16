@@ -1,11 +1,11 @@
 import React from 'react';
-import { butter_token } from '../../pages/api/tokens';
+import process from '../../pages/api/.env.development.local';
 
 export const endpoints = {
-  pessoas: `https://api.buttercms.com/v2/content/friends/?auth_token=${butter_token}`,
+  pessoas: `https://api.buttercms.com/v2/content/friends/?auth_token=${process.env.butter_token}`,
   comunidades: 'https://graphql.datocms.com',
-  detalhes: `https://api.buttercms.com/v2/content/details/?auth_token=${butter_token}`,
-  posts: `https://api.buttercms.com/v2/posts/?auth_token=${butter_token}`
+  detalhes: `https://api.buttercms.com/v2/content/details/?auth_token=${process.env.butter_token}`,
+  posts: `https://api.buttercms.com/v2/posts/?auth_token=${process.env.butter_token}`
 }
 
 export const queries = {

@@ -27,11 +27,9 @@ yarn-error.log*
 # local env files
 .env.local
 .env.development.local
+.env.development.local.js
 .env.test.local
 .env.production.local
 
 # vercel
 .vercel
-
-# authentication
-*token*
